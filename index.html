@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wayfare &mdash; Find your next trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-row">
+    <a href="#" class="logo" aria-label="Wayfare home">
+      <span class="mark">way<span>fare</span></span>
+    </a>
+
+    <nav class="header-tabs" aria-label="Primary">
+      <a href="#discover">Discover</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#more">More</a>
+    </nav>
+
+    <div class="header-right">
+      <a href="#" class="currency">USD</a>
+      <a href="#" class="btn-signin">Sign in</a>
+    </div>
+  </div>
+</header>
+
+<nav class="category-nav" aria-label="Category navigation">
+  <ul>
+    <li><a href="#hero" class="active">Explore</a></li>
+    <li><a href="#hotels">Hotels</a></li>
+    <li><a href="#flights">Flights</a></li>
+    <li><a href="#restaurants">Restaurants</a></li>
+    <li><a href="#things-to-do">Things to Do</a></li>
+    <li><a href="#cruises">Cruises</a></li>
+    <li><a href="#forums">Forums</a></li>
+  </ul>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero-banner" id="hero">
+  <div class="hero-banner-inner">
+    <h1>Where to?</h1>
+
+    <div class="search-panel">
+      <div class="search-tabs" id="searchTabs">
+        <button class="search-tab active" data-tab="all">All</button>
+        <button class="search-tab" data-tab="things">Things to Do</button>
+        <button class="search-tab" data-tab="hotels">Hotels</button>
+        <button class="search-tab" data-tab="restaurants">Restaurants</button>
+      </div>
+      <div class="search-bar">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search destinations, hotels, restaurants, things to do..." aria-label="Search">
+        <button class="search-go">Search</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURE BANNER ================= -->
+<section class="feature-banner">
+  <div class="feature-banner-text">
+    <span class="eyebrow">400,000+ experiences</span>
+    <h2>Turn "someday" into a booked ticket</h2>
+    <p>Browse tours, tickets, and activities picked from real traveler reviews, then book straight from Wayfare.</p>
+    <button class="btn-primary">Book now</button>
+  </div>
+  <div class="feature-banner-media">
+    <img src="https://loremflickr.com/700/500/travel,adventure" alt="Traveler exploring a scenic overlook" loading="lazy">
+  </div>
+</section>
+
+<!-- ================= INTERESTS ================= -->
+<section class="section" id="things-to-do">
+  <div class="section-head">
+    <h2>Browse by interest</h2>
+  </div>
+  <p class="section-sub">Pick a mood, and we'll point you at the trip.</p>
+  <div class="grid cols-4 interests-grid" id="interestsGrid"></div>
+</section>
+
+<!-- ================= ICONIC PLACES ================= -->
+<section class="section" id="experiences">
+  <div class="section-head">
+    <h2>Icons worth the trip</h2>
+    <a href="#" class="see-all">See all</a>
+  </div>
+  <div class="grid cols-4 iconic-grid" id="iconicGrid"></div>
+</section>
+
+<!-- ================= AWARDS BANNER ================= -->
+<section class="awards-banner">
+  <img class="awards-bg" src="https://loremflickr.com/1400/500/celebration,award" alt="" loading="lazy">
+  <div class="awards-overlay"></div>
+  <div class="awards-content">
+    <span class="eyebrow">Editors' Choice</span>
+    <h2>Wayfare Awards<br>Best of the Best</h2>
+    <p>Our top 1% of stays, eats, and experiences, ranked from thousands of real traveler reviews.</p>
+    <a href="#" class="btn-secondary">See the winners</a>
+  </div>
+</section>
+
+<section class="section" id="hotels">
+  <div class="section-head">
+    <h2>Popular hotels</h2>
+    <a href="#" class="see-all">See all</a>
+  </div>
+  <div class="grid cols-4" id="hotelsGrid"></div>
+</section>
+
+<section class="section" id="restaurants" style="padding-bottom:56px;">
+  <div class="section-head">
+    <h2>Top-rated restaurants</h2>
+    <a href="#" class="see-all">See all</a>
+  </div>
+  <div class="grid cols-3" id="restaurantsGrid"></div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>About Wayfare</h4>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Resources &amp; policies</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Trust &amp; safety</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#">Write a review</a></li>
+        <li><a href="#">Add a place</a></li>
+        <li><a href="#">Join</a></li>
+        <li><a href="#">Wayfare Awards</a></li>
+        <li><a href="#">Help centre</a></li>
+        <li><a href="#">Travel stories</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Do business with us</h4>
+      <ul>
+        <li><a href="#">Owners &amp; DMO/CVB</a></li>
+        <li><a href="#">Business advantage</a></li>
+        <li><a href="#">Sponsored placements</a></li>
+        <li><a href="#">Advertise with us</a></li>
+        <li><a href="#">Access our content API</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get the app</h4>
+      <ul>
+        <li><a href="#">iPhone app</a></li>
+        <li><a href="#">Android app</a></li>
+      </ul>
+      <div class="footer-brand">
+        <div class="mark">way<span>fare</span></div>
+        <p>Traveler reviews and booking comparisons, all in one trip planner.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Wayfare Inc. &mdash; demo build, made for learning purposes</span>
+    <span>USD $ &middot; United States</span>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
