@@ -6,7 +6,520 @@
 <title>Wayfare &mdash; Find your next trip</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<style>
+:root{
+  --bg:#FBFBF8;
+  --card:#FFFFFF;
+  --teal:#00AA6C;
+  --teal-dark:#0E3B2E;
+  --accent:#1FCB79;
+  --ink:#1B2B24;
+  --muted:#5E6F68;
+  --line:#E1E7E2;
+  --sand:#EAF6F0;
+
+  --display:'Fraunces', serif;
+  --body:'Work Sans', sans-serif;
+  --mono:'Space Mono', monospace;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; }
+img{ display:block; max-width:100%; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+input{ font-family:inherit; }
+
+:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
+
+/* ================= HEADER ================= */
+header.site-header{
+  background:var(--card);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:16px 32px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.logo{
+  display:flex;
+  align-items:baseline;
+  gap:2px;
+  flex-shrink:0;
+}
+.logo .mark{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:26px;
+  color:var(--teal-dark);
+  letter-spacing:-0.5px;
+}
+.logo .mark span{ color:var(--accent); }
+
+.header-tabs{
+  display:flex;
+  align-items:center;
+  gap:26px;
+  font-size:14px;
+  font-weight:600;
+}
+.header-tabs a{
+  color:var(--ink);
+  padding:6px 0;
+  border-bottom:2px solid transparent;
+  transition:color .15s ease, border-color .15s ease;
+}
+.header-tabs a:hover{ color:var(--teal-dark); border-color:var(--accent); }
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  font-size:14px;
+  font-weight:600;
+  flex-shrink:0;
+}
+.currency{
+  color:var(--muted);
+  padding:8px 10px;
+  border-radius:8px;
+  transition:background .15s ease, color .15s ease;
+}
+.currency:hover{ background:var(--sand); color:var(--ink); }
+.btn-signin{
+  background:var(--teal-dark);
+  color:#fff !important;
+  padding:9px 18px;
+  border-radius:999px;
+  transition:background .15s ease;
+}
+.btn-signin:hover{ background:var(--teal); }
+
+/* ================= CATEGORY NAV ================= */
+nav.category-nav{ background:var(--teal-dark); }
+nav.category-nav ul{
+  display:flex;
+  gap:4px;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 32px;
+  overflow-x:auto;
+}
+nav.category-nav a{
+  display:block;
+  padding:13px 18px;
+  font-size:13.5px;
+  font-weight:600;
+  color:#CFE6E4;
+  letter-spacing:.2px;
+  border-bottom:3px solid transparent;
+  transition:color .15s ease, border-color .15s ease, background .15s ease;
+  white-space:nowrap;
+}
+nav.category-nav a:hover{ color:#fff; background:rgba(255,255,255,.06); }
+nav.category-nav a.active{ color:#fff; border-color:var(--accent); }
+
+/* ================= HERO BANNER ("Where to?") ================= */
+.hero-banner{
+  position:relative;
+  padding:72px 32px 96px;
+  background:
+    linear-gradient(180deg, rgba(14,59,46,.82), rgba(14,59,46,.55)),
+    url('https://loremflickr.com/1600/700/coastline,travel') center/cover no-repeat;
+  color:#fff;
+  text-align:center;
+}
+.hero-banner-inner{
+  max-width:760px;
+  margin:0 auto;
+}
+.hero-banner h1{
+  font-family:var(--display);
+  font-size:52px;
+  font-weight:600;
+  margin-bottom:32px;
+}
+
+.search-panel{
+  background:var(--card);
+  border-radius:16px;
+  box-shadow:0 24px 48px -20px rgba(0,0,0,.35);
+  padding:10px 10px 0;
+  text-align:left;
+}
+.search-tabs{
+  display:flex;
+  gap:4px;
+  padding:6px 6px 0;
+}
+.search-tab{
+  padding:10px 16px;
+  border-radius:10px 10px 0 0;
+  font-size:13.5px;
+  font-weight:700;
+  color:var(--muted);
+  transition:color .15s ease, background .15s ease;
+}
+.search-tab:hover{ color:var(--teal-dark); }
+.search-tab.active{
+  color:var(--teal-dark);
+  background:var(--sand);
+}
+.search-bar{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--sand);
+  border-radius:0 12px 12px 12px;
+  padding:6px 6px 6px 18px;
+}
+.search-bar svg{
+  width:18px;
+  height:18px;
+  stroke:var(--muted);
+  flex-shrink:0;
+}
+.search-bar input{
+  flex:1;
+  border:none;
+  background:transparent;
+  padding:14px 4px;
+  font-size:15px;
+  color:var(--ink);
+}
+.search-bar input::placeholder{ color:var(--muted); }
+.search-go{
+  background:var(--accent);
+  color:#fff;
+  font-weight:700;
+  font-size:14.5px;
+  padding:13px 26px;
+  border-radius:9px;
+  transition:background .15s ease, transform .1s ease;
+  flex-shrink:0;
+}
+.search-go:hover{ background:#159C5B; }
+.search-go:active{ transform:scale(.98); }
+
+/* ================= FEATURE BANNER ================= */
+.feature-banner{
+  max-width:1200px;
+  margin:-56px auto 0;
+  background:var(--card);
+  border-radius:18px;
+  box-shadow:0 24px 48px -28px rgba(31,42,46,.3);
+  padding:40px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+  position:relative;
+  z-index:2;
+}
+.feature-banner-text .eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  display:block;
+  margin-bottom:12px;
+}
+.feature-banner-text h2{
+  font-family:var(--display);
+  font-size:30px;
+  font-weight:600;
+  color:var(--teal-dark);
+  line-height:1.15;
+  margin-bottom:14px;
+}
+.feature-banner-text p{
+  color:var(--muted);
+  font-size:15px;
+  margin-bottom:22px;
+  max-width:420px;
+}
+.btn-primary{
+  background:var(--teal-dark);
+  color:#fff;
+  font-weight:700;
+  font-size:14.5px;
+  padding:13px 26px;
+  border-radius:9px;
+  transition:background .15s ease;
+}
+.btn-primary:hover{ background:var(--teal); }
+.feature-banner-media img{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+/* ================= SECTIONS (shared) ================= */
+.section{
+  max-width:1200px;
+  margin:0 auto;
+  padding:64px 32px 8px;
+}
+.section-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  margin-bottom:8px;
+  border-bottom:1px solid var(--line);
+  padding-bottom:16px;
+}
+.section-head h2{
+  font-family:var(--display);
+  font-size:28px;
+  font-weight:600;
+  color:var(--teal-dark);
+}
+.section-head .see-all{
+  font-size:13px;
+  font-weight:700;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+.section-head .see-all:hover{ text-decoration:underline; }
+.section-sub{
+  color:var(--muted);
+  font-size:14px;
+  margin:16px 0 24px;
+}
+
+/* grid layouts */
+.grid{ display:grid; gap:22px; }
+.grid.cols-4{ grid-template-columns:repeat(4,1fr); }
+.grid.cols-3{ grid-template-columns:repeat(3,1fr); }
+
+.card{
+  background:var(--card);
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 30px -18px rgba(31,42,46,.28);
+}
+.card .thumb{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+  background:var(--sand);
+}
+.card .body{ padding:16px; }
+.card h3{ font-size:15.5px; font-weight:700; margin-bottom:4px; }
+.card .place{ font-size:12.5px; color:var(--muted); margin-bottom:8px; }
+.rating{ display:flex; align-items:center; gap:6px; font-size:12.5px; }
+.stars{ color:var(--accent); letter-spacing:1px; font-size:13px; }
+.rating .count{ color:var(--muted); }
+
+/* interest cards */
+.interests-grid .card{ text-align:center; }
+.interests-grid .thumb{ height:120px; }
+.interests-grid .body{ padding:14px; }
+.interests-grid h3{ margin:0; font-size:14.5px; }
+
+/* iconic place cards (bigger, image-led) */
+.iconic-grid .card .thumb{ height:220px; }
+.iconic-grid .body{ padding:14px 4px; border-top:none; }
+.iconic-grid .card{ border:none; background:transparent; }
+.iconic-grid .card:hover .thumb{ opacity:.92; }
+.iconic-grid h3{ font-family:var(--display); font-size:18px; font-weight:600; }
+
+.hotel-card .body{ display:flex; flex-direction:column; gap:6px; }
+.hotel-price{
+  margin-top:6px;
+  font-family:var(--mono);
+  font-size:14px;
+  font-weight:700;
+  color:var(--teal-dark);
+}
+.hotel-price span{
+  font-family:var(--body);
+  font-weight:400;
+  color:var(--muted);
+  font-size:11.5px;
+}
+
+.restaurant-card{ display:flex; align-items:center; gap:14px; padding:14px; }
+.restaurant-card .thumb{ width:86px; height:86px; border-radius:10px; flex-shrink:0; }
+.restaurant-card .body{ padding:0; flex:1; }
+.cuisine-tag{
+  display:inline-block;
+  margin-top:4px;
+  font-family:var(--mono);
+  font-size:10.5px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  color:var(--teal-dark);
+  background:var(--sand);
+  padding:3px 8px;
+  border-radius:6px;
+}
+
+/* ================= AWARDS BANNER ================= */
+.awards-banner{
+  position:relative;
+  max-width:1200px;
+  margin:64px auto 0;
+  border-radius:18px;
+  overflow:hidden;
+  min-height:340px;
+  display:flex;
+  align-items:center;
+}
+.awards-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.awards-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(100deg, rgba(14,59,46,.92) 0%, rgba(14,59,46,.55) 55%, rgba(14,59,46,.15) 100%);
+}
+.awards-content{
+  position:relative;
+  z-index:2;
+  padding:48px;
+  max-width:480px;
+  color:#fff;
+}
+.awards-content .eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  display:block;
+  margin-bottom:14px;
+}
+.awards-content h2{
+  font-family:var(--display);
+  font-size:34px;
+  font-weight:600;
+  line-height:1.15;
+  margin-bottom:14px;
+}
+.awards-content p{
+  font-size:14.5px;
+  color:#E4F2F1;
+  margin-bottom:22px;
+}
+.btn-secondary{
+  display:inline-block;
+  background:#fff;
+  color:var(--teal-dark);
+  font-weight:700;
+  font-size:14.5px;
+  padding:13px 26px;
+  border-radius:9px;
+  transition:background .15s ease;
+}
+.btn-secondary:hover{ background:var(--sand); }
+
+/* ================= FOOTER ================= */
+footer{
+  margin-top:64px;
+  background:var(--teal-dark);
+  color:#CFE6E4;
+}
+.footer-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:48px 32px 28px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:32px;
+}
+.footer-brand{ margin-top:24px; }
+.footer-brand .mark{
+  font-family:var(--display);
+  font-size:20px;
+  font-weight:700;
+  color:#fff;
+}
+.footer-brand .mark span{ color:var(--accent); }
+.footer-brand p{ margin-top:10px; font-size:12.5px; color:#9FC4C2; max-width:220px; }
+.footer-col h4{
+  font-size:12.5px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  color:#fff;
+  margin-bottom:14px;
+}
+.footer-col ul li{ margin-bottom:9px; }
+.footer-col a{ font-size:13.5px; color:#B9DAD8; transition:color .15s ease; }
+.footer-col a:hover{ color:#fff; }
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.12);
+  padding:18px 32px;
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:#8FB8B6;
+  font-family:var(--mono);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 980px){
+  .grid.cols-4{ grid-template-columns:repeat(2,1fr); }
+  .grid.cols-3{ grid-template-columns:repeat(2,1fr); }
+  .footer-inner{ grid-template-columns:1fr 1fr; }
+  .feature-banner{ grid-template-columns:1fr; margin-top:-40px; padding:28px; }
+  .awards-content{ max-width:100%; }
+  .header-tabs{ display:none; }
+}
+@media (max-width: 680px){
+  .header-row{ flex-wrap:wrap; gap:12px; }
+  .grid.cols-4, .grid.cols-3{ grid-template-columns:1fr; }
+  .hero-banner h1{ font-size:34px; }
+  .hero-banner{ padding:48px 20px 84px; }
+  .search-tabs{ overflow-x:auto; }
+  .footer-inner{ grid-template-columns:1fr; }
+  .awards-content{ padding:32px 24px; }
+  .awards-content h2{ font-size:26px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; scroll-behavior:auto !important; }
+}
+
+</style>
 </head>
 <body>
 
@@ -175,6 +688,136 @@
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script>
+// ---------------------------------------------------------
+// Wayfare — sample data
+// Images are pulled live from LoremFlickr (free, no key
+// required) using topic keywords, so each card gets a real,
+// relevant Creative-Commons photo instead of a gray box.
+// Swap any URL for your own image (e.g. "images/kyoto.jpg")
+// if you'd rather ship your own photos in the repo.
+// ---------------------------------------------------------
+
+const interests = [
+  { name: "Outdoors", img: "https://loremflickr.com/400/300/hiking,outdoors" },
+  { name: "Food",     img: "https://loremflickr.com/400/300/street,food" },
+  { name: "Culture",  img: "https://loremflickr.com/400/300/museum,culture" },
+  { name: "Water",    img: "https://loremflickr.com/400/300/beach,water" }
+];
+
+const iconicPlaces = [
+  { name: "Rome, Italy",       img: "https://loremflickr.com/500/400/rome,colosseum" },
+  { name: "Paris, France",     img: "https://loremflickr.com/500/400/paris,eiffeltower" },
+  { name: "Las Vegas, NV",     img: "https://loremflickr.com/500/400/lasvegas,strip" },
+  { name: "London, UK",        img: "https://loremflickr.com/500/400/london,bigben" }
+];
+
+const hotels = [
+  { name: "The Marlow House",   place: "Kyoto, Japan",          rating: 4.6, reviews: "2,341", price: 212, img: "https://loremflickr.com/400/300/japan,hotel" },
+  { name: "Aegean Cliffside",   place: "Santorini, Greece",     rating: 4.9, reviews: "5,102", price: 340, img: "https://loremflickr.com/400/300/santorini,hotel" },
+  { name: "Table Bay Lodge",    place: "Cape Town, S. Africa",  rating: 4.5, reviews: "1,890", price: 158, img: "https://loremflickr.com/400/300/safari,lodge" },
+  { name: "Rocky Ridge Inn",    place: "Banff, Canada",         rating: 4.7, reviews: "3,004", price: 189, img: "https://loremflickr.com/400/300/mountain,cabin" }
+];
+
+const restaurants = [
+  { name: "Nishiki Kitchen", cuisine: "Japanese",       place: "Kyoto",     rating: 4.8, reviews: "1,204", img: "https://loremflickr.com/200/200/japanese,food" },
+  { name: "Caldera Table",   cuisine: "Mediterranean",  place: "Santorini", rating: 4.9, reviews: "2,310", img: "https://loremflickr.com/200/200/mediterranean,food" },
+  { name: "Harbor & Vine",   cuisine: "Seafood",        place: "Cape Town", rating: 4.6, reviews: "980",   img: "https://loremflickr.com/200/200/seafood,restaurant" }
+];
+
+function starString(rating) {
+  const full = Math.round(rating);
+  return "★".repeat(full) + "☆".repeat(5 - full);
+}
+
+function renderInterests() {
+  const el = document.getElementById("interestsGrid");
+  el.innerHTML = interests.map(i => `
+    <div class="card">
+      <img class="thumb" src="${i.img}" alt="${i.name}" loading="lazy">
+      <div class="body">
+        <h3>${i.name}</h3>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderIconicPlaces() {
+  const el = document.getElementById("iconicGrid");
+  el.innerHTML = iconicPlaces.map(p => `
+    <div class="card">
+      <img class="thumb" src="${p.img}" alt="${p.name}" loading="lazy">
+      <div class="body">
+        <h3>${p.name}</h3>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderHotels() {
+  const el = document.getElementById("hotelsGrid");
+  el.innerHTML = hotels.map(h => `
+    <div class="card hotel-card">
+      <img class="thumb" src="${h.img}" alt="${h.name}" loading="lazy">
+      <div class="body">
+        <h3>${h.name}</h3>
+        <div class="place">${h.place}</div>
+        <div class="rating">
+          <span class="stars">${starString(h.rating)}</span>
+          <span class="count">${h.rating} (${h.reviews})</span>
+        </div>
+        <div class="hotel-price">$${h.price} <span>/ night</span></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderRestaurants() {
+  const el = document.getElementById("restaurantsGrid");
+  el.innerHTML = restaurants.map(r => `
+    <div class="card restaurant-card">
+      <img class="thumb" src="${r.img}" alt="${r.name}" loading="lazy">
+      <div class="body">
+        <h3>${r.name}</h3>
+        <div class="place">${r.place}</div>
+        <div class="rating">
+          <span class="stars">${starString(r.rating)}</span>
+          <span class="count">${r.rating} (${r.reviews})</span>
+        </div>
+        <span class="cuisine-tag">${r.cuisine}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+renderInterests();
+renderIconicPlaces();
+renderHotels();
+renderRestaurants();
+
+// ---------------------------------------------------------
+// Interactivity
+// ---------------------------------------------------------
+
+// Hero search tabs (All / Things to Do / Hotels / Restaurants)
+const searchTabs = document.getElementById("searchTabs");
+if (searchTabs) {
+  searchTabs.addEventListener("click", (e) => {
+    const tab = e.target.closest(".search-tab");
+    if (!tab) return;
+    searchTabs.querySelectorAll(".search-tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+  });
+}
+
+// Nav bar active-link highlight
+document.querySelectorAll(".category-nav a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelectorAll(".category-nav a").forEach(a => a.classList.remove("active"));
+    link.classList.add("active");
+  });
+});
+
+</script>
 </body>
 </html>
